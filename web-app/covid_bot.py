@@ -1,23 +1,11 @@
 
-<<<<<<< HEAD
 # MODEL IMPORTS
 import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_text as text  # Imports TF ops for preprocessing.
 
-=======
-import tensorflow as tf
-import tensorflow_hub as hub
-import tensorflow_text
 
-import hickle as hkl
-import pandas as pd
-import traceback
-from scipy import spatial
-import numpy as np
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
-
-# from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer, AutoModel
 import torch
 
 # UTILITY IMPORTS 
@@ -41,7 +29,6 @@ def preprocess_sentences(input_sentences):
     return [re.sub(r'(covid-19|covid)', 'coronavirus', input_sentence, flags=re.I) 
             for input_sentence in input_sentences]
 
-<<<<<<< HEAD
 def similarity(vector1,vector2):
   cosine_similarity = 1 - spatial.distance.cosine(vector1, vector2)
   # print(cosine_similarity)
@@ -172,20 +159,9 @@ def generate_top_k_answers(queries,df,k):
 #       top_p=0.95, 
 #       num_return_sequences=3
 #   )
-=======
-def load_embedding_module():
-  module = hub.load('https://tfhub.dev/google/universal-sentence-encoder-multilingual-qa/3')
-  return module
-
-  # # Load the BERT encoder and preprocessing models
-  # preprocess = hub.load('https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/1')
-  # bert = hub.load('https://tfhub.dev/google/experts/bert/pubmed/2')
-  # return preprocess, bert
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
 
 #   return sample_outputs
 
-<<<<<<< HEAD
 #   # print("Output:\n" + 100 * '-')
 #   # for i, sample_output in enumerate(sample_outputs):
 #   #   print("{}: {}".format(i, tokenizer.decode(sample_output, skip_special_tokens=True)))
@@ -246,22 +222,12 @@ def load_embedding_module():
 #   with torch.no_grad():
 #       vector = model(torch.LongTensor([indexed_tokens]).to('cuda'))[1].cpu().numpy().tolist()
 #   return vector[0]
-=======
-def create_qna_embeddings(data, module):  
-  # NORMAL USE : tf_hub -> 1 sentence : 1 embedding
-  # Create response embeddings
-  response_encodings = module.signatures['response_encoder'](
-    input=tf.constant(preprocess_sentences(data.Answer)),
-    context=tf.constant(preprocess_sentences(data.Context)))['outputs']
-  return response_encodings
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
 
 
 # def cosine_smilarity(v1, v2):
 #     cosine_similarity = 1 - spatial.distance.cosine(v1, v2)
 #     return cosine_similarity
 
-<<<<<<< HEAD
 
 
 # # def run_covid_bot(input,embeddings):
@@ -298,60 +264,6 @@ def create_qna_embeddings(data, module):
 #   # except:
 #   #   traceback.print_exc()
 #   #   return jsonify({'success': False, 'utterances': None})
-=======
-def run_covid_bot(questions,data,module,response_encodings):
-  
-  # Create encodings for test questions
-  question_encodings = module.signatures['question_encoder'](
-      tf.constant(preprocess_sentences(questions))
-  )['outputs']
-
-  # Get the responses
-  test_responses = data.Answer[np.argmax(np.inner(question_encodings, response_encodings), axis=1)]
-
-  # Show them in a dataframe
-  generated_output = pd.DataFrame({'Test Questions': questions, 'Test Responses': test_responses})
-  return generated_output.to_string() #.to_html()
-
-
-
-
-
-# def run_covid_bot(input,embeddings):
-#   try:
-    # embeddings = hkl.load('who_covid_19_question_embedding.hkl')
-    # CSV_FILE = "../data/who_covid_19_data.csv"
- 
-  #   #Load AutoModel from huggingface model repository
-  #   # model = AutoModel.from_pretrained("sentence-transformers/bert-base-nli-cls-token")
-  #   # tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/bert-base-nli-cls-token")
-  #   tokenizer = AutoTokenizer.from_pretrained("digitalepidemiologylab/covid-twitter-bert-v2")
-  #   model = AutoModel.from_pretrained("digitalepidemiologylab/covid-twitter-bert-v2")
-
-  #   #Tokenize sentences
-  #   encoded_input = tokenizer(input, padding=True, truncation=True, max_length=128, return_tensors='pt')
-
-
-  #   with torch.no_grad():
-  #       model_output = model(**encoded_input)
-  #       input_embedding = model_output[0][:,0]
-
-
-  #   # input_embedding = model.encode(input)
-  #   q_id = 0;
-  #   max_score = 0;
-  #   for i, e in enumerate(embeddings):
-  #       similarity = cosine_smilarity(input_embedding, e)
-  #       if similarity > max_score :
-  #           q_id = i
-  #           max_score = similarity
-  #   result = data["answer"][q_id]
-  #   similar_question = data["question"][q_id]
-  #   return jsonify({'success': True, 'user_question': input , 'similar_question':similar_question, 'similarity': max_score,  'answer': result })
-  # except:
-  #   traceback.print_exc()
-  #   return jsonify({'success': False, 'utterances': None})
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
 
 
 

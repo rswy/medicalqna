@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request, render_template,jsonify
-<<<<<<< HEAD
 from covid_bot import generate_embeddings, generate_top_k_answers
-=======
-from covid_bot import run_covid_bot,load_embedding_module,create_qna_embeddings
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
 import pandas as pd
 
 # REPLACE THIS WITH FUNCTION FROM COVID_BOT.PY
@@ -17,7 +13,6 @@ import pandas as pd
 def create_app(sentence_embeddings=None):
     
     # Load data  
-<<<<<<< HEAD
     data = pd.read_csv("../data/questionDoctorQAs.csv")
     df = data.sample(n=1000)
     df.reset_index(drop=True, inplace=True)
@@ -34,17 +29,6 @@ def create_app(sentence_embeddings=None):
     # module = load_embedding_module()   
     # # create qn and response embeddings
     # response_encodings = create_qna_embeddings(data,module)
-=======
-    # data = pd.read_csv("../data/who_covid_19_data.csv")
-    data = pd.read_excel("../data/WHO_FAQ.xlsx")
-    
-    # load embedding module:
-    module = load_embedding_module()
-    
-    
-    # create qn and response embeddings
-    response_encodings = create_qna_embeddings(data,module)
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
 
 
     # create and configure the app
@@ -61,16 +45,12 @@ def create_app(sentence_embeddings=None):
 
         # # POST
         input = request.form.get("textarea")
-<<<<<<< HEAD
         top_5_answers_index,top_5_answers = generate_top_k_answers(input,df,5)
         response  = top_5_answers
 
         # response = run_covid_bot(input,qn_embedding,answer_embedding) #run_covid_bot(input,data,module,response_encodings)
         
         
-=======
-        response = run_covid_bot(input,data,module,response_encodings)
->>>>>>> 9076ef069a98493d4f61a10710bb889b4671f667
         return render_template("chatbot.html", response=response)
         # response = run_covid_bot(input,sentence_embeddings)
         # return render_template("chatbot.html", response=response.get_data(as_text=True))
