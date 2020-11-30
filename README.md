@@ -7,7 +7,7 @@
 ## Collab Notebook
 
 
-Google Collab Notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.gatech.edu/rsim6/medicalqna/blob/master/medicalqna.ipynb)
+Google Collab Notebook: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/rswy/medicalqna/blob/master/medicalqna.ipynb)
 
 ### What you have to run in the collab/jupyter notebook
 Steps: 
