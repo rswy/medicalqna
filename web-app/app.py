@@ -46,7 +46,7 @@ def create_app(sentence_embeddings=None):
         # # POST
         input = request.form.get("textarea")
         top_5_answers_index,top_5_answers = generate_top_k_answers(input,df,5)
-        response  = top_5_answers
+        response  = [input]+top_5_answers
 
         # response = run_covid_bot(input,qn_embedding,answer_embedding) #run_covid_bot(input,data,module,response_encodings)
         
