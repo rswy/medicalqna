@@ -1,3 +1,6 @@
+# CREDIT GOES TO THIS notebook which I used as reference to test train my model on : https://colab.research.google.com/drive/13dZVYEOMhXhkXWfvSMVM1TTtUDrT6Aeh?usp=sharing#scrollTo=x0WeP5PREUuy
+
+
 from torch.utils.data import Dataset, DataLoader, random_split, RandomSampler, SequentialSampler
 torch.manual_seed(42)
 from transformers import GPT2LMHeadModel,  GPT2Tokenizer, GPT2Config, GPT2LMHeadModel
