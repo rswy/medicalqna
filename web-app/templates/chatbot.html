@@ -53,7 +53,8 @@
   jQuery.each(x, function( index, value ) {
     console.log(value);
     if(counter==0){
-      jQuery('#rlist').append('<div class="chat">'  +'Question '+ value + '</div>');
+      jQuery('#rlist').append('<div class="chat">'  +'Question: '+ value + '</div>');
+      counter=counter+1
     }else{
       jQuery('#rlist').append('<div class="chat">' + y +' '+ value + '</div>');
       counter = counter+1
