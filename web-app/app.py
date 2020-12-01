@@ -14,7 +14,7 @@ def create_app(sentence_embeddings=None):
     
     # Load data  
     data = pd.read_csv("../data/questionDoctorQAs.csv")
-    df = data.sample(n=1000)
+    df = data.sample(n=100)
     df.reset_index(drop=True, inplace=True)
     
     df = generate_embeddings(df)
